@@ -5,8 +5,8 @@ var ajaxCall = (key, url, prompt) => {
       type: "POST",
       dataType: "json",
       data: JSON.stringify({
-        model: "text-davinci-002",
-        prompt: prompt,
+        model: "gpt-4o", // Actualizado al modelo gpt-4o
+        messages: [{ role: "user", content: prompt }], // Uso de messages en lugar de prompt
         max_tokens: 1024,
         n: 1,
         temperature: 0.5,
@@ -28,7 +28,7 @@ var ajaxCall = (key, url, prompt) => {
   });
 };
 
-const url = "https://api.openai.com/v1";
+const url = "https://api.openai.com/v1/chat/completions"; // URL para chat completions
 
 (function () {
   const template = document.createElement("template");
@@ -42,11 +42,10 @@ const url = "https://api.openai.com/v1";
     async post(apiKey, endpoint, prompt) {
       const { response } = await ajaxCall(
         apiKey,
-        `${url}/${endpoint}`,
+        `${url}`, // Endpoint directo para chat completions
         prompt
       );
-      //console.log(response.choices[0].text);
-      return response.choices[0].text;
+      return response.choices[0].message.content; // Acceso al contenido del mensaje
     }
   }
   customElements.define("custom-widget", MainWebComponent);
