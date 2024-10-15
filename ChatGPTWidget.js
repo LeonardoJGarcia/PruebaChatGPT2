@@ -5,7 +5,7 @@ var ajaxCall = (key, url, prompt) => {
       type: "POST",
       dataType: "json",
       data: JSON.stringify({
-        model: "gpt-4o-latest", // Actualizado al modelo gpt-4o
+        model: "chatgpt-4o-latest", // Actualizado al modelo gpt-4o
         messages: [{ role: "user", content: prompt }], // Uso de messages en lugar de prompt
         max_tokens: 1024,
         n: 1,
